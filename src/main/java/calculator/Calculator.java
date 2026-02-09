@@ -1,8 +1,6 @@
 package calculator;
 
 import java.util.List;
-import java.util.function.ToIntFunction;
-import java.util.stream.Collectors;
 
 public class Calculator {
     public Calculator() {
