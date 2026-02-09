@@ -11,6 +11,33 @@ public class StringToIntegerFomatter {
     public StringToIntegerFomatter() {
     }
 
+    public List<String> validator(List<String> input) {
+        List<Integer> numbers = parseAll(input);
+        validateNoNegative(numbers);
+        return input;
+    }
+
+    private List<Integer> parseAll(List<String> input) {
+        try {
+            return input.stream()
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 있습니다.");
+        }
+    }
+
+    private void validateNoNegative(List<Integer> numbers) {
+        if (!hasNegative(numbers)) {
+            return;
+        }
+        throw new IllegalArgumentException("음수가 있습니다.");
+    }
+
+    private boolean hasNegative(List<Integer> numbers) {
+        return numbers.stream().anyMatch(n -> n < 0);
+    }
+
     public List<String> formatCommaAndColon(String input) {
 
         return List.of(input.split(",|:"));

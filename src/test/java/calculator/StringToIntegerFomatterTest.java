@@ -34,4 +34,22 @@ public class StringToIntegerFomatterTest {
         assertThat(result).containsExactly("1", "2", "3");
     }
 
+    @Test
+    void 음수_예외처리() {
+        List<String> custom = List.of("10", "-1");
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> formatter.validator(custom))
+                .withMessage("음수가 있습니다.");
+    }
+
+    @Test
+    void 문자_예외처리() {
+        List<String> custom = List.of("나", "-1");
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> formatter.validator(custom))
+                .withMessageContaining("숫자가 아닌 값이 있습니다.");
+    }
+
 }
