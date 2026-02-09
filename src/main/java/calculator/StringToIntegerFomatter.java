@@ -39,7 +39,6 @@ public class StringToIntegerFomatter {
     }
 
     public List<String> formatCommaAndColon(String input) {
-
         return List.of(input.split(",|:"));
     }
 
