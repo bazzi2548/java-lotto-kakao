@@ -10,12 +10,10 @@ public class CalculatorMain {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-
-        System.out.println(input);
-
+        
         input = input.replace("\\n", "\n");
         List<String> inputList = formatter.validator(formatter.format(input));
-        
+
         int result = calculator.add(inputList);
         System.out.println(result);
 
