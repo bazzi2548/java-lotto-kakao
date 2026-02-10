@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoController {
@@ -16,7 +15,8 @@ public class LottoController {
         try {
             Money money = new Money(InputView.readPurchaseAmount());
             LottoBundle lottos = buyLottos(money);
-            processResult(lottos);
+            WinningLotto winningLotto = makeWinningLotto();
+            processResult(lottos, winningLotto, money);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             run(); // 예외 발생 시 재시도 로직
@@ -31,16 +31,21 @@ public class LottoController {
         return bundle;
     }
 
-    private void processResult(LottoBundle lottos) {
-        // 당첨 번호 입력 -> 판정 -> 수익률 계산 -> 결과 출력 흐름을 구현하세요.
-        String numbers = InputView.readWinningNumbers();
-        int bonusNumber = InputView.readingBonusNumber();
-        WinningLotto winningLotto = makeWinningLotto(numbers, bonusNumber);
-//        LottoJudge.judge()
-//        judge판단 후에 모든 것을 종합해서
+    private void processResult(LottoBundle lottos, WinningLotto winningLotto, Money money) {
+        LottoResult lottoResult = new LottoResult(lottos.getLottos().stream()
+                .map(lotto -> LottoJudge.judge(winningLotto, lotto))
+                .collect(Collectors.toList()));
+
+        OutputView.printStatisticsHeader();
+        OutputView.printResult(lottoResult);
+        OutputView.printYield(lottoResult.calculateYield(money));
+
     }
 
-    private WinningLotto makeWinningLotto(String winningNumbers, int bonusNumber) {
+    private WinningLotto makeWinningLotto() {
+        String winningNumbers = InputView.readWinningNumbers();
+        int bonusNumber = InputView.readingBonusNumber();
+
         return new WinningLotto(Arrays.stream(winningNumbers.split(", "))
                 .map((String number) -> new LottoNumber(Integer.parseInt(number)))
                 .collect(Collectors.toList()), new LottoNumber(bonusNumber));

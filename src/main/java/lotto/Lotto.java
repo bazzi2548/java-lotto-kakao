@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
@@ -30,5 +31,14 @@ public class Lotto {
         if (lottoNumbers.size() != 6){
             throw new IllegalArgumentException("로또번호가 6개가 아닙니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber) // LottoNumber 객체에서 숫자(int)만 추출
+                .sorted()                    // 오름차순 정렬 (요구사항)
+                .collect(Collectors.toList())
+                .toString();                 // [1, 2, 3, 4, 5, 6] 형태로 반환
     }
 }

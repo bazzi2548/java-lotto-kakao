@@ -1,7 +1,7 @@
 package lotto;
 
 public class YieldCalculator {
-    public static double calculate(long purchasedMoney, long totalWinningMoney){
+    public static double calculate(long totalWinningMoney, long purchasedMoney){
         if(purchasedMoney == 0){
             return 0;
         }
