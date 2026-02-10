@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
@@ -7,6 +8,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
+        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber).reversed());
         this.lottoNumbers = lottoNumbers;
     }
 

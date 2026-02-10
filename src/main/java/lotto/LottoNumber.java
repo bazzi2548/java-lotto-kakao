@@ -3,7 +3,8 @@ package lotto;
 import java.util.Objects;
 
 public class LottoNumber {
-
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private final int number;
 
     public LottoNumber(int number){
@@ -16,7 +17,7 @@ public class LottoNumber {
     }
 
     private static void validateRangeOfNumber(int number){
-        if (number < 1 || number > 45) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("숫자 범위를 벗어났습니다.");
         }
     }
