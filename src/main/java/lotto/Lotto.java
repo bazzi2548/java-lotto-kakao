@@ -1,18 +1,22 @@
 package lotto;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class Lotto {
-    public Set<Integer> generateLotto(){
-        Set<Integer> numberSet = new HashSet<>();
-        LottoNumber lottoNumber = new LottoNumber();
-        while(numberSet.size()<6){
-            numberSet.add(lottoNumber.generateNumber());
-        }
-        return numberSet;
+    private final List<LottoNumber> lottoNumbers;
+
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validateSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
-//    public Boolean duplicateNumber(){
-//
-//    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    private static void validateSize(List<LottoNumber> lottoNumbers){
+        if (lottoNumbers.size() != 6){
+            throw new IllegalArgumentException("로또번호가 6개가 아닙니다.");
+        }
+    }
 }
