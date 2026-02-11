@@ -1,10 +1,8 @@
 package lotto;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
-
-import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class LottoGame {
 
@@ -36,7 +34,7 @@ public class LottoGame {
 
     private void processResult(LottoBundle lottos, WinningLotto winningLotto, Money money) {
         LottoResult lottoResult = new LottoResult(lottos.getLottos().stream()
-                .map(lotto -> LottoJudge.judge(winningLotto, lotto))
+                .map(winningLotto::judge)
                 .collect(Collectors.toList()));
 
         OutputView.printStatisticsHeader();
@@ -46,12 +44,11 @@ public class LottoGame {
     }
 
     private WinningLotto makeWinningLotto() {
-        String winningNumbers = InputView.readWinningNumbers();
-        int bonusNumber = InputView.readingBonusNumber();
+        List<LottoNumber> winningNumbers = new ArrayList<>(LottoParser.parseWinningNumbers(
+            InputView.readWinningNumbers()));
+        LottoNumber bonusNumber = new LottoNumber(LottoParser.parseBonusNumber(
+            InputView.readingBonusNumber()));
 
-        return new WinningLotto(Arrays.stream(winningNumbers.split(", "))
-                .map((String number) -> new LottoNumber(Integer.parseInt(number)))
-                .collect(Collectors.toList()), new LottoNumber(bonusNumber));
-
+        return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }
 }

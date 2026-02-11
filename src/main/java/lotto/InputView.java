@@ -16,9 +16,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static int readingBonusNumber(){
+    public static String readingBonusNumber(){
         System.out.println("보너스 볼을 입력해주세요.");
-        return scanner.nextInt();
+        return scanner.nextLine();
     }
 
     private static Long parseNumber(String number) {

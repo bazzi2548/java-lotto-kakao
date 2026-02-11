@@ -8,22 +8,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoJudgeTest {
+public class WinningLottoTest {
 
     private final Lotto lotto = testSetLotto();
 
     @Test
     @DisplayName("일치하는 개수 판단")
     void 일치개수_테스트() {
-        var winning = new WinningLotto(testSetWinning(20, 26), new LottoNumber(40));
-        Assertions.assertThat(LottoJudge.judge(winning, lotto)).isEqualTo(Rank.MISS);
+        var winning = new WinningLotto(new Lotto(21, 22, 23, 24, 25, 26), new LottoNumber(40));
+        Assertions.assertThat(winning.judge(lotto)).isEqualTo(Rank.MISS);
     }
 
     @Test
     void 일등_테스트() {
-        var winning = new WinningLotto(testSetWinning(1, 7), new LottoNumber(40));
+        var winning = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(40));
 
-        Assertions.assertThat(LottoJudge.judge(winning, lotto)).isEqualTo(Rank.FIRST);
+        Assertions.assertThat(winning.judge(lotto)).isEqualTo(Rank.FIRST);
     }
 
     Lotto testSetLotto() {
