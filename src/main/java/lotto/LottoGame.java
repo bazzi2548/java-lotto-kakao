@@ -46,9 +46,10 @@ public class LottoGame {
     private WinningLotto makeWinningLotto() {
         List<LottoNumber> winningNumbers = new ArrayList<>(LottoParser.parseWinningNumbers(
             InputView.readWinningNumbers()));
+        Lotto lotto = new Lotto(winningNumbers);
         LottoNumber bonusNumber = new LottoNumber(LottoParser.parseBonusNumber(
             InputView.readingBonusNumber()));
 
-        return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
+        return new WinningLotto(lotto, bonusNumber);
     }
 }
