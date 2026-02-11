@@ -11,10 +11,6 @@ public class WinningLotto {
 		this.bonusNumber = bonusNumber;
     }
 
-    public boolean matchBonus(Lotto lotto){
-        return lotto.contains(bonusNumber);
-    }
-
 	public Rank judge(Lotto lotto) {
 		int matchCount = winningNumbers.countMatchingNumbers(lotto);
 		boolean matchBonus = lotto.contains(bonusNumber);
