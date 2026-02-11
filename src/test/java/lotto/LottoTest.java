@@ -26,14 +26,17 @@ public class LottoTest {
     void 일치하는_개수_반환(){
         Lotto userLotto = testSetLotto(1,7);
         Lotto winningLotto = testSetLotto(4,10);
-        Assertions.assertThat(userLotto.countMatchingNumbers(winningLotto)).isEqualTo(3);
+        var actual = userLotto.countMatchingNumbers(winningLotto);
+        Assertions.assertThat(actual).isEqualTo(3);
     }
 
     @Test
     void 일치_없을때_0_반환(){
         Lotto userLotto = testSetLotto(1,7);
         Lotto winningLotto = testSetLotto(8,14);
-        Assertions.assertThat(userLotto.countMatchingNumbers(winningLotto)).isEqualTo(0);
+        var actual = userLotto.countMatchingNumbers(winningLotto);
+
+        Assertions.assertThat(actual).isEqualTo(0);
     }
 
     Lotto testSetLotto(int start, int end){
