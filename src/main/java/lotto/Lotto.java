@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +12,13 @@ public class Lotto {
         validateSize(lottoNumbers);
         lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber).reversed());
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public Lotto(int... values) {
+        this(Arrays.stream(values)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList())
+        );
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -38,7 +46,7 @@ public class Lotto {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber) // LottoNumber 객체에서 숫자(int)만 추출
                 .sorted()                    // 오름차순 정렬 (요구사항)
-                .collect(Collectors.toList())
+                .toList()
                 .toString();                 // [1, 2, 3, 4, 5, 6] 형태로 반환
     }
 }

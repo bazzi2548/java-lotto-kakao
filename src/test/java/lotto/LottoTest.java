@@ -9,23 +9,16 @@ import java.util.stream.IntStream;
 public class LottoTest {
     @Test
     void 숫자_6개_생성_테스트(){
-        var numbers = IntStream.range(1, 7)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 
         Assertions.assertThat(lotto.getLottoNumbers().size())
                 .isEqualTo(6);
     }
 
     @Test
-    void 중복_테스트(){
-        var numbers = IntStream.range(1, 6)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
-
+    void 숫자_개수_테스트(){
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers))
+                .isThrownBy(() -> new Lotto(1, 2, 3, 4, 5))
                 .withMessage("로또번호가 6개가 아닙니다.");
     }
 
