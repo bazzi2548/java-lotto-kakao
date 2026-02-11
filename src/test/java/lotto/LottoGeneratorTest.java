@@ -1,0 +1,16 @@
+package lotto;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
+
+public class LottoGeneratorTest {
+    @Test
+    void 숫자_6개_생성_테스트() {
+        Lotto numbers = LottoGenerator.generateLotto();
+        Assertions.assertThat(numbers.getLottoNumbers().size())
+                .isEqualTo(6);
+    }
+}
