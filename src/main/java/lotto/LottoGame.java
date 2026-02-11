@@ -3,11 +3,14 @@ package lotto;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class LottoController {
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
+public class LottoGame {
 
     private final LottoService lottoService;
 
-    public LottoController() {
+    public LottoGame() {
         this.lottoService = new LottoService();
     }
 
