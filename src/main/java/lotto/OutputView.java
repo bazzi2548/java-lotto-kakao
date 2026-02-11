@@ -21,13 +21,23 @@ public class OutputView {
 
     public static void printResult(LottoResult lottoResult) {
         Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.MISS)
-                .sorted(Comparator.comparingInt(Rank::getWinningMoney))
-                .forEach(rank -> printRankLine(rank, lottoResult.getCount(rank)));
+            .filter(rank -> rank != Rank.MISS)
+            .sorted(Comparator
+                .comparingInt(Rank::getCountOfMatch)
+                .thenComparing(Rank::isMatchBonus))
+            .forEach(rank -> resultFormat(lottoResult, rank));
     }
 
-    private static void printRankLine(Rank rank, int count) {
-        System.out.println(rank.getMessage() + " - " + count + "개");
+    private static void resultFormat(LottoResult lottoResult, Rank rank){
+        System.out.printf("%s (%s원) - %d개%n",
+            matchDescription(rank),
+            rank.getWinningMoney(),
+            lottoResult.getCount(rank));
+    }
+
+    private static String matchDescription(Rank rank) {
+        if (rank == Rank.SECOND) return "5개 일치, 보너스 볼 일치";
+        return rank.getCountOfMatch() + "개 일치";
     }
 
     public static void printYield(double yield) {
