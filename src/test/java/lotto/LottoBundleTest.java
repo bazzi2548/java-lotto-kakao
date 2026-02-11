@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoBundle;
+import lotto.domain.LottoNumber;
+
 public class LottoBundleTest {
     @Test
     void 입력된_개수만큼_생성_테스트() {

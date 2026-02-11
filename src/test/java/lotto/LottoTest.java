@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+
 public class LottoTest {
     @Test
     void 숫자_6개_생성_테스트(){

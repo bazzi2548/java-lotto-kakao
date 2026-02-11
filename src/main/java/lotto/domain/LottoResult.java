@@ -1,5 +1,7 @@
-package lotto;
+package lotto.domain;
 import java.util.*;
+
+import lotto.util.YieldCalculator;
 
 public class LottoResult {
     private final Map<Rank, Integer> result;

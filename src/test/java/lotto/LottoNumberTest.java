@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.LottoNumber;
+
 public class LottoNumberTest {
 
     @DisplayName("1부터 45사이의 숫자 확인")

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.domain.Rank;
+
 public class RankTest {
 
     @DisplayName("일치 개수와 보너스 볼 여부에 따른 등수 확인")

@@ -1,7 +1,11 @@
-package lotto;
+package lotto.view;
 
 import java.util.Arrays;
 import java.util.Comparator;
+
+import lotto.domain.LottoBundle;
+import lotto.domain.LottoResult;
+import lotto.domain.Rank;
 
 public class OutputView {
     public static void printPurchaseCount(int count) {
