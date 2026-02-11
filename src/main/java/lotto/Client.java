@@ -2,7 +2,7 @@ package lotto;
 
 public class Client {
     public static void main(String[] args) {
-        LottoController controller = new LottoController();
+        LottoGame controller = new LottoGame();
         controller.run();
     }
 }
