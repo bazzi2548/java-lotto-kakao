@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2_000_000_000, false),
     SECOND(5, 30_000_000, true),
@@ -19,12 +21,10 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        for (Rank rank : values()) {
-            if (rank.isSatisfiedBy(countOfMatch, matchBonus)) {
-                return rank;
-            }
-        }
-        return MISS;
+        return Arrays.stream(Rank.values())
+            .filter(rank -> rank.isSatisfiedBy(countOfMatch, matchBonus))
+            .findAny()
+            .orElse(MISS);
     }
 
     private boolean isSatisfiedBy(int countOfMatch, boolean matchBonus) {
