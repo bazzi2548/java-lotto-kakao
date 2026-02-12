@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
+    private static final int LOTTO_SIZE = 6;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
@@ -36,7 +37,7 @@ public class Lotto {
     }
 
     private static void validateSize(List<LottoNumber> lottoNumbers){
-        if (lottoNumbers.size() != 6){
+        if (lottoNumbers.size() != LOTTO_SIZE){
             throw new IllegalArgumentException("로또번호가 6개가 아닙니다.");
         }
     }
