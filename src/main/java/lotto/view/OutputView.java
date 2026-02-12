@@ -14,8 +14,7 @@ public class OutputView {
 
     public static void printLottoBundle(LottoBundle bundle) {
         bundle.getLottos()
-                .forEach(System.out::println);
-
+                .forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 
     public static void printStatisticsHeader() {
