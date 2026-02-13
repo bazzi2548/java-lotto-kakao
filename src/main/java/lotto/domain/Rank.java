@@ -28,15 +28,7 @@ public enum Rank {
     }
 
     private boolean isSatisfiedBy(int countOfMatch, boolean matchBonus) {
-        if (this.countOfMatch != countOfMatch) {
-            return false;
-        }
-
-        if (this.matchBonus && !matchBonus) {
-            return false;
-        }
-
-        return true;
+        return this.countOfMatch == countOfMatch && this.matchBonus == matchBonus;
     }
 
     public int getCountOfMatch() {
