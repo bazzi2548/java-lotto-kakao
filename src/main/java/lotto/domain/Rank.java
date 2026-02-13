@@ -21,6 +21,10 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        if (countOfMatch > 6 || countOfMatch < 0){
+            throw new IllegalArgumentException("맞춘 번호는 0 ~ 6 사이여야 합니다.");
+        }
+
         return Arrays.stream(Rank.values())
             .filter(rank -> rank.isSatisfiedBy(countOfMatch, matchBonus))
             .findAny()
