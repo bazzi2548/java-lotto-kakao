@@ -17,7 +17,7 @@ public class LottoBundle {
 		return lottos;
 	}
 
-	public List<Rank> getRank(WinningLotto winningLotto) {
+	public List<Rank> matchAll(WinningLotto winningLotto) {
 		return lottos.stream()
 			.map(winningLotto::judge)
 			.toList();
