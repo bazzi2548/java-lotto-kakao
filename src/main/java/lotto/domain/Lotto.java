@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
     private static final int LOTTO_SIZE = 6;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
