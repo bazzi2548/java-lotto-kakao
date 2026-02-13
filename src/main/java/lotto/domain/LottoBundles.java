@@ -13,10 +13,10 @@ public class LottoBundles {
 		this.autoLottos = autoLottos;
 	}
 
-	public LottoResult rankAll(WinningLotto winningLotto) {
+	public LottoResult matchAll(WinningLotto winningLotto) {
 		List<Rank> ranks = new ArrayList<>();
-		ranks.addAll(manualLottos.getRank(winningLotto));
-		ranks.addAll(autoLottos.getRank(winningLotto));
+		ranks.addAll(manualLottos.match(winningLotto));
+		ranks.addAll(autoLottos.match(winningLotto));
 
 		return new LottoResult(ranks);
 	}

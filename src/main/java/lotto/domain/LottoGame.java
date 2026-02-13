@@ -62,7 +62,7 @@ public class LottoGame {
 	}
 
 	private void processResult(LottoBundles lottos, WinningLotto winningLotto, Money money) {
-		LottoResult lottoResult = lottos.rankAll(winningLotto);
+		LottoResult lottoResult = lottos.matchAll(winningLotto);
 
 		OutputView.printStatisticsHeader();
 		OutputView.printResult(lottoResult);
