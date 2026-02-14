@@ -1,8 +1,8 @@
 package lotto.domain;
 
 public class Money {
-	private final long money;
 	private static final int PRICE_UNIT = 1000;
+	private final long money;
 
 	public Money(long money) {
 		validateUnit(money);
