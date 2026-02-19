@@ -74,7 +74,7 @@ public class LottoGame {
 		List<LottoNumber> winningNumbers = LottoParser.parseLottoNumbers(
 			InputView.readWinningNumbers());
 		Lotto lotto = new Lotto(winningNumbers);
-		LottoNumber bonusNumber = new LottoNumber(LottoParser.parseBonusNumber(
+		LottoNumber bonusNumber = LottoNumber.valueOf(LottoParser.parseBonusNumber(
 			InputView.readingBonusNumber()));
 
 		return new WinningLotto(lotto, bonusNumber);

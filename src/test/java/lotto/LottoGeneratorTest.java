@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
+import lotto.generator.LottoGenerator;
 
 public class LottoGeneratorTest {
     @Test

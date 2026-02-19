@@ -17,7 +17,7 @@ public class Lotto {
 
     public Lotto(int... values) {
         this(Arrays.stream(values)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::valueOf)
             .collect(Collectors.toList())
         );
     }

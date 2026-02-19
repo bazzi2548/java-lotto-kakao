@@ -13,14 +13,14 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4})
     void 숫자_범위_테스트(int number){
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.valueOf(number);
         Assertions.assertThat(lottoNumber.getNumber()).isBetween(1, 45);
     }
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("정상 범위 바깥 예외처리 확인")
     void 범위_예외_테스트(int number){
-        Assertions.assertThatThrownBy(() -> new LottoNumber(number))
+        Assertions.assertThatThrownBy(() -> LottoNumber.valueOf(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자 범위를 벗어났습니다.");
     }

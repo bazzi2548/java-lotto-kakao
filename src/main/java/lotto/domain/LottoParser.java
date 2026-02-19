@@ -16,7 +16,7 @@ public class LottoParser {
 		return new ArrayList<>(Arrays.stream(input.split(DELIMITER))
 			.map(String::trim)
 			.map(LottoParser::toInt)
-			.map(LottoNumber::new)
+			.map(LottoNumber::valueOf)
 			.toList());
 	}
 

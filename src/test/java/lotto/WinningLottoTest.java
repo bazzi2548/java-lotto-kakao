@@ -20,26 +20,26 @@ public class WinningLottoTest {
     @Test
     @DisplayName("일치하는 개수 판단")
     void 일치개수_테스트() {
-        var winning = new WinningLotto(new Lotto(21, 22, 23, 24, 25, 26), new LottoNumber(40));
+        var winning = new WinningLotto(new Lotto(21, 22, 23, 24, 25, 26), LottoNumber.valueOf(40));
         Assertions.assertThat(winning.judge(lotto)).isEqualTo(Rank.MISS);
     }
 
     @Test
     void 일등_테스트() {
-        var winning = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(40));
+        var winning = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), LottoNumber.valueOf((40)));
 
         Assertions.assertThat(winning.judge(lotto)).isEqualTo(Rank.FIRST);
     }
 
     Lotto testSetLotto() {
         return new Lotto(IntStream.range(1, 7)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
     }
 
     List<LottoNumber> testSetWinning(int start, int end) {
         return IntStream.range(start, end)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }
