@@ -15,7 +15,7 @@ import lotto.domain.LottoNumber;
 public class LottoBundleTest {
     @Test
     void 입력된_개수만큼_생성_테스트() {
-        LottoBundle lottoBundle = new LottoBundle(makeLottos());
+        LottoBundle lottoBundle = LottoBundle.of(makeLottos());
         Assertions.assertThat(lottoBundle.size())
                 .isEqualTo(3);
     }
@@ -30,7 +30,7 @@ public class LottoBundleTest {
 
     Lotto testSetLotto(int start, int end){
         return new Lotto(IntStream.range(start, end)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
     }
 }

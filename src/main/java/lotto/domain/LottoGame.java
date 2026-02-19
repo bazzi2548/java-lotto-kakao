@@ -1,24 +1,25 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
+import lotto.generator.AutoLottoBundleGenerator;
+import lotto.generator.CompositeLottoBundleGenerator;
+import lotto.generator.LottoBundleGenerator;
+import lotto.generator.LottoGenerator;
+import lotto.generator.ManualLottoBundleGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoGame {
 
-	private final LottoService lottoService;
-
-	public LottoGame() {
-		this.lottoService = new LottoService();
-	}
-
 	public void run() {
 		try {
 			Money money = new Money(InputView.readPurchaseAmount());
-			LottoBundles lottos = buyLotto(money);
+			LottoBundle lottos = buyLotto(money);
 			WinningLotto winningLotto = makeWinningLotto();
 
 			processResult(lottos, winningLotto, money);
@@ -28,23 +29,27 @@ public class LottoGame {
 		}
 	}
 
-	private LottoBundles buyLotto(Money money) {
+	private LottoBundle buyLotto(Money money) {
 		LottoPurchaseAmount amount = new LottoPurchaseAmount(money, InputView.readManualCount());
-		return new LottoBundles(buyManualLottos(amount), buyAutoLottos(amount));
-	}
+		var manualGenerator = new ManualLottoBundleGenerator(askManualLottos(amount.getManualCount()));
+		var autoGenerator = new AutoLottoBundleGenerator(amount.getAutoCount(), new LottoGenerator());
 
-	private LottoBundle buyManualLottos(LottoPurchaseAmount amount) {
-		int count = amount.getManualCount();
-		return new LottoBundle(askManualLottos(count));
+		OutputView.printPurchaseCount(amount);
+
+		LottoBundleGenerator composite =
+			new CompositeLottoBundleGenerator(List.of(manualGenerator, autoGenerator));
+
+		LottoBundle purchased = composite.generate();
+		OutputView.printLottoBundle(purchased); // 전체 출력(수동+자동)로 바뀜
+		return purchased;
 	}
 
 	private List<Lotto> askManualLottos(int count) {
-		List<Lotto> manualLottos = new ArrayList<>();
 		OutputView.purchaseManual();
-		for (int i = 0; i < count; i++) {
-			manualLottos.add(repeatUntilSuccess(this::createManualLotto));
-		}
-		return manualLottos;
+
+		return IntStream.range(0, count)
+			.mapToObj(i -> repeatUntilSuccess(this::createManualLotto))
+			.toList();
 	}
 
 	private Lotto createManualLotto() {
@@ -53,21 +58,11 @@ public class LottoGame {
 		return new Lotto(lottoNumbers);
 	}
 
-	private LottoBundle buyAutoLottos(LottoPurchaseAmount amount) {
-		int count = amount.getAutoCount();
-		OutputView.printPurchaseCount(amount);
-		LottoBundle bundle = lottoService.purchaseAuto(count);
-		OutputView.printLottoBundle(bundle);
-		return bundle;
-	}
-
-	private void processResult(LottoBundles lottos, WinningLotto winningLotto, Money money) {
-		LottoResult lottoResult = lottos.matchAll(winningLotto);
-
+	private void processResult(LottoBundle lottos, WinningLotto winningLotto, Money money) {
+		LottoResult lottoResult = new LottoResult(lottos.match(winningLotto));
 		OutputView.printStatisticsHeader();
 		OutputView.printResult(lottoResult);
 		OutputView.printYield(lottoResult.calculateYield(money));
-
 	}
 
 	private WinningLotto makeWinningLotto() {

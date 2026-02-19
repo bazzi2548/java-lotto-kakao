@@ -9,7 +9,8 @@ import lotto.generator.LottoGenerator;
 public class LottoGeneratorTest {
     @Test
     void 숫자_6개_생성_테스트() {
-        Lotto numbers = LottoGenerator.generateLotto();
+        LottoGenerator generator = new LottoGenerator();
+        Lotto numbers = generator.generate();
         Assertions.assertThat(numbers.getLottoNumbers().size())
                 .isEqualTo(6);
     }

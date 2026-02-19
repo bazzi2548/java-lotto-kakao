@@ -19,7 +19,7 @@ public class OutputView {
 	}
 
 	public static void printLottoBundle(LottoBundle bundle) {
-		bundle.getLottos()
+		bundle.asList()
 			.forEach(lotto -> System.out.println(lotto.getNumbers()));
 	}
 
